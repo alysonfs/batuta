@@ -35,9 +35,16 @@ ORCHESTRATOR
 ├── SOFTWARE ARCHITECT
 │   ├── BACKEND ENGINEER
 │   └── FRONTEND ENGINEER
-├── QA ENGINEER
-│   └── DOCUMENTATION
-└── RELEASE-VERSIONING
+├── AWS ARCHITECT
+│   └── AWS COST MONITOR
+├── BRAND STRATEGIST
+├── BRAND IDENTITY
+├── BRAND COPYWRITER
+├── BRAND CONTENT
+├── BRAND GUARDIAN
+└── QA ENGINEER
+    └── DOCUMENTATION
+        └── RELEASE-VERSIONING
 ```
 
 A representação acima descreve autoridade e fluxo de trabalho, e não
@@ -134,11 +141,130 @@ Pode decidir sobre a arquitetura da aplicação.
 Não pode:
 
 - alterar requisitos de negócio;
-- decidir infraestrutura ou operação fora do escopo definido pelo projeto;
+- decidir infraestrutura AWS sem envolver o `aws-architect`;
 - implementar uma feature como substituição da equipe de engenharia;
 - aprovar uma release.
 
-## 7. Backend Engineer
+## 7. AWS Architect
+
+### Responsabilidade
+
+O `aws-architect` define a arquitetura de infraestrutura AWS.
+
+Responsável por:
+
+- serviços AWS;
+- infraestrutura;
+- IaC;
+- IAM;
+- rede;
+- armazenamento;
+- computação;
+- mensageria;
+- observabilidade;
+- segurança da infraestrutura;
+- custos;
+- escalabilidade;
+- disponibilidade.
+
+Pode contar com o agente `aws-cost-monitor` para consultas operacionais e
+somente leitura de custos, budgets e tendências de gasto AWS.
+
+### Autoridade
+
+Pode decidir sobre infraestrutura AWS dentro dos requisitos e da
+arquitetura aprovados.
+
+Não pode:
+
+- alterar requisitos;
+- redefinir arquitetura da aplicação;
+- alterar regras de negócio;
+- aprovar funcionalidade;
+- aprovar release.
+
+### Agente auxiliar: Cora/aws-cost-monitor
+
+A `Cora/aws-cost-monitor` apoia o `Ari/aws-architect` em consultas sob demanda
+de gastos AWS.
+
+Responsável por:
+
+- consultar custos AWS via comandos somente leitura;
+- verificar budgets e tendências;
+- identificar serviços com maior custo;
+- reportar riscos de estouro de orçamento.
+
+Não pode:
+
+- criar, alterar ou remover recursos AWS;
+- alterar budgets, alarmes, IAM ou configurações;
+- executar monitoramento contínuo em loop;
+- substituir decisões do `aws-architect`.
+
+## 8. Brand Strategist
+
+### Responsabilidade
+
+O `brand-strategist` traduz o manifesto do ATUA em posicionamento, públicos,
+proposta de valor, mensagens-chave e tom de voz.
+
+### Autoridade
+
+Pode decidir sobre a estratégia de marca do ATUA. Não pode delegar trabalho,
+alterar requisitos de produto, definir arquitetura ou UI, aprovar software ou
+liberar uma release. Reporta-se ao `orchestrator`.
+
+## 9. Brand Identity
+
+### Responsabilidade
+
+O `brand-identity` define diretrizes de identidade visual e materiais externos
+coerentes com a estratégia de marca aprovada.
+
+### Autoridade
+
+Pode decidir sobre identidade visual externa. Não pode alterar o design system,
+tokens ou interface do produto sem coordenação do `orchestrator` com
+`software-architect` e `frontend-engineer`.
+
+## 10. Brand Copywriter
+
+### Responsabilidade
+
+O `brand-copywriter` cria textos institucionais, slogans e mensagens conforme a
+estratégia e o guia verbal aprovados.
+
+### Autoridade
+
+Pode decidir a redação de entregáveis sob a estratégia aprovada. Não pode
+redefinir posicionamento ou requisitos de produto.
+
+## 11. Brand Content
+
+### Responsabilidade
+
+O `brand-content` planeja narrativas e conteúdos de canais conforme os guias de
+marca aprovados.
+
+### Autoridade
+
+Pode estruturar conteúdos sob demanda. Não pode criar calendário editorial,
+campanha ou promessa comercial fora do escopo delegado.
+
+## 12. Brand Guardian
+
+### Responsabilidade
+
+O `brand-guardian` revisa, sob demanda, a consistência de entregáveis de marca
+com a estratégia, identidade e guia verbal aprovados.
+
+### Autoridade
+
+Pode bloquear somente o entregável de marca em revisão e recomendar correções.
+Não aprova software, não bloqueia release e não substitui o `qa-engineer`.
+
+## 13. Backend Engineer
 
 ### Responsabilidade
 
@@ -169,7 +295,7 @@ Não pode:
 
 - inventar regras de negócio;
 - redefinir arquitetura;
-- alterar infraestrutura do projeto quando isso estiver fora do escopo delegado;
+- alterar infraestrutura AWS;
 - alterar contratos relevantes sem coordenação;
 - aprovar sua própria implementação;
 - fazer push, criar tags ou definir versão;
@@ -177,9 +303,9 @@ Não pode:
 - executar comandos Git destrutivos ou amplos sem pathspec especifico
   (`git clean`, `git reset --hard`, `git checkout`/`git restore` sem
   arquivo/diretório explícito, `git stash drop`/`git stash pop`) sem
-  autorização explícita do usuário.
+  autorização explícita do usuário (ver ADR-006).
 
-## 8. Frontend Engineer
+## 14. Frontend Engineer
 
 ### Responsabilidade
 
@@ -219,9 +345,9 @@ Não pode:
 - executar comandos Git destrutivos ou amplos sem pathspec especifico
   (`git clean`, `git reset --hard`, `git checkout`/`git restore` sem
   arquivo/diretório explícito, `git stash drop`/`git stash pop`) sem
-  autorização explícita do usuário.
+  autorização explícita do usuário (ver ADR-006).
 
-## 9. QA Engineer
+## 15. QA Engineer
 
 ### Responsabilidade
 
@@ -256,7 +382,7 @@ backend ou frontend declarou conclusão.
 
 O QA possui independência para reprovar uma implementação.
 
-## 10. Documentation
+## 16. Documentation
 
 ### Responsabilidade
 
@@ -286,7 +412,7 @@ Não pode:
 - declarar uma implementação aprovada;
 - decidir versão.
 
-## 11. Release Versioning
+## 17. Release Versioning
 
 ### Responsabilidade
 
@@ -319,7 +445,7 @@ Não pode:
 - aprovar QA;
 - ignorar bloqueios.
 
-## 12. Regra de autoridade por domínio
+## 18. Regra de autoridade por domínio
 
 Cada decisão deve pertencer ao domínio correto.
 
@@ -328,8 +454,14 @@ Cada decisão deve pertencer ao domínio correto.
 | O que o produto deve fazer? | Product Analyst |
 | Qual comportamento é esperado? | Product Analyst |
 | Qual critério determina sucesso? | Product Analyst |
+| Qual posicionamento, mensagem ou tom de voz aplicar? | Brand Strategist |
+| Como expressar visualmente a marca fora da UI? | Brand Identity |
+| O texto respeita a voz e as mensagens aprovadas? | Brand Copywriter |
+| O entregável de marca está consistente? | Brand Guardian |
 | Como a aplicação será estruturada? | Software Architect |
 | Como os componentes se comunicam? | Software Architect |
+| Qual serviço AWS utilizar? | AWS Architect |
+| Como a infraestrutura será configurada? | AWS Architect |
 | Como implementar uma função backend? | Backend Engineer |
 | Como implementar uma interface? | Frontend Engineer |
 | A implementação atende aos requisitos? | QA Engineer |
@@ -337,7 +469,7 @@ Cada decisão deve pertencer ao domínio correto.
 | Qual versão representa a entrega? | Release Versioning |
 | Como coordenar o workflow? | Orchestrator |
 
-## 13. Regra de escalonamento
+## 19. Regra de escalonamento
 
 Quando um agente encontrar uma decisão fora de seu domínio:
 
@@ -364,13 +496,20 @@ Orchestrator
 Software Architect
 ```
 
-### Exemplo: especialidade adicional do projeto
+### Exemplo: alteração de infraestrutura
 
-Quando a tarefa exigir uma especialidade que não exista no template base
-(infraestrutura, segurança, dados, operação etc.), o `orchestrator` deve
-envolver o responsável configurado no projeto.
+```text
+Frontend Engineer
+      |
+      | precisa alterar infraestrutura
+      v
+Orchestrator
+      |
+      v
+AWS Architect
+```
 
-## 14. Comunicação direta
+## 20. Comunicação direta
 
 Agentes não devem iniciar comunicação arbitrária entre si para tomar
 decisões fora do workflow.
@@ -395,7 +534,7 @@ Isso permite que o `orchestrator` mantenha:
 - decisões;
 - estado da tarefa.
 
-## 15. Exceção
+## 21. Exceção
 
 O `orchestrator` pode solicitar diretamente uma colaboração entre dois
 agentes quando isso for necessário.
@@ -413,7 +552,7 @@ Orchestrator
 Nesse caso, a colaboração deve continuar subordinada ao workflow
 coordenado pelo `orchestrator`.
 
-## 16. Decisões fora do domínio
+## 22. Decisões fora do domínio
 
 Quando um agente identificar uma decisão que não pode tomar sozinho,
 deve utilizar:
@@ -440,7 +579,7 @@ Agente recomendado:
 <agente>
 ```
 
-## 17. Conflitos entre agentes
+## 23. Conflitos entre agentes
 
 Quando dois agentes apresentarem decisões incompatíveis:
 
@@ -466,16 +605,40 @@ O `orchestrator` deve:
 
 Nenhum agente deve simplesmente ignorar a decisão do outro.
 
-## 18. Conflitos de autoridade
+## 24. Conflitos de autoridade
 
 Quando dois agentes acreditarem possuir autoridade sobre a mesma decisão,
 o `orchestrator` deve determinar o domínio correto.
 
-Se a decisão envolver domínios adicionais ao template base, o
-`orchestrator` coordena a participação dos especialistas configurados no
-projeto.
+Exemplo:
 
-## 19. Proibição de autoridade implícita
+```text
+Software Architect
+        |
+        | arquitetura da aplicação
+        v
+     decisão
+
+AWS Architect
+        |
+        | infraestrutura AWS
+        v
+     decisão
+```
+
+Se a decisão envolver ambos, ela deve ser coordenada:
+
+```text
+Software Architect
+        |
+        +----------+
+        |          |
+        v          v
+       AWS      Orchestrator
+   Architect
+```
+
+## 25. Proibição de autoridade implícita
 
 Nenhum agente pode assumir autoridade apenas porque:
 
@@ -488,7 +651,7 @@ Nenhum agente pode assumir autoridade apenas porque:
 
 Conhecimento não equivale a autoridade.
 
-## 20. Princípio da menor autoridade
+## 26. Princípio da menor autoridade
 
 Cada agente deve tomar somente as decisões necessárias para executar
 sua responsabilidade.
@@ -501,11 +664,14 @@ coordenação necessário.
 | Decisão local | Agente responsável |
 | Decisão entre componentes | Orchestrator e agentes envolvidos |
 | Decisão arquitetural | Software Architect |
+| Decisão de infraestrutura | AWS Architect |
 | Decisão de produto | Product Analyst |
+| Decisão de estratégia de marca | Brand Strategist |
+| Revisão de consistência de marca | Brand Guardian |
 | Decisão de aprovação | QA |
 | Decisão de release | Release Versioning |
 
-## 21. Aprovação não é implementação
+## 27. Aprovação não é implementação
 
 Os seguintes estados são diferentes:
 
@@ -527,7 +693,7 @@ Significa que a entrega está preparada para release.
 
 Nenhum desses estados deve ser utilizado como substituto de outro.
 
-## 22. Reprovação
+## 23. Reprovação
 
 Se o QA reprovar uma implementação:
 
@@ -556,7 +722,7 @@ QA
 O ciclo continua até `APPROVED` ou até o `orchestrator` decidir
 interromper a tarefa.
 
-## 23. Bloqueio
+## 24. Bloqueio
 
 Qualquer agente pode declarar `BLOCKED` quando não puder continuar de
 forma segura ou correta.
@@ -570,7 +736,7 @@ Um bloqueio deve informar:
 
 O `orchestrator` decide como resolver ou encaminhar o bloqueio.
 
-## 24. Mudanças arquiteturais
+## 25. Mudanças arquiteturais
 
 Quando uma implementação exigir mudança arquitetural:
 
@@ -598,10 +764,9 @@ Engineer
 
 O engenheiro implementa conforme a nova decisão.
 
-## 25. Mudanças de infraestrutura e operação
+## 26. Mudanças de infraestrutura
 
-Quando uma implementação exigir mudanças de infraestrutura, operação,
-segurança ou outra especialidade fora do template base:
+Quando uma implementação exigir mudança de infraestrutura:
 
 ```text
 Engineer
@@ -610,13 +775,22 @@ Engineer
 Orchestrator
    |
    v
-Responsável configurado no projeto
+AWS Architect
 ```
 
-A decisão deve ser coordenada e registrada conforme o workflow e os
-protocolos do repositório.
+O `aws-architect` avalia. Se aprovado:
 
-## 26. Mudanças de requisitos
+```text
+AWS Architect
+   |
+   v
+Orchestrator
+   |
+   v
+Engineer / Infraestrutura
+```
+
+## 27. Mudanças de requisitos
 
 Quando uma implementação ou o QA revelar que o requisito está incorreto
 ou incompleto:
@@ -635,7 +809,7 @@ O `product-analyst` reavalia o requisito.
 
 Nenhum agente técnico deve alterar o requisito silenciosamente.
 
-## 27. Documentação
+## 28. Documentação
 
 Documentação deve ocorrer após decisões e alterações relevantes terem
 sido suficientemente definidas.
@@ -644,7 +818,7 @@ O agente `documentation` registra o resultado.
 
 Ele não deve utilizar documentação para criar autoridade sobre decisões.
 
-## 28. Release
+## 29. Release
 
 Uma release deve respeitar:
 
@@ -670,7 +844,7 @@ Release
 Uma release não deve ser preparada como concluída quando existir um
 bloqueio relevante.
 
-## 29. Regra de ouro
+## 30. Regra de ouro
 
 - Quem executa não necessariamente decide.
 - Quem decide não necessariamente executa.
@@ -679,7 +853,7 @@ bloqueio relevante.
 
 A equipe funciona pela separação de responsabilidades.
 
-## 30. Regra final
+## 31. Regra final
 
 Quando houver dúvida sobre quem deve decidir:
 

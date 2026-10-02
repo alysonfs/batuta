@@ -46,15 +46,37 @@ Decide questões relacionadas a:
 
 ---
 
+### Marca
+
+`brand-strategist`
+
+Decide questões relacionadas a:
+
+- posicionamento;
+- proposta de valor;
+- mensagens-chave;
+- tom de voz;
+- direcionamento estratégico de marca.
+
+As decisões de marca não alteram requisitos de produto, arquitetura, UI,
+aprovação de QA ou release. Quando uma decisão de marca afetar um desses
+domínios, ela deve ser coordenada pelo `orchestrator` com o responsável.
+
+---
+
 ### Arquitetura
 
 `software-architect`
 
 Decide questões relacionadas à arquitetura de software.
 
-Quando o projeto possuir especialistas adicionais (por exemplo, infraestrutura,
-dados ou segurança), o `orchestrator` deve coordenar a decisão com o
-responsável configurado no repositório.
+---
+
+### Infraestrutura
+
+`aws-architect`
+
+Decide questões relacionadas à arquitetura AWS e infraestrutura.
 
 ---
 

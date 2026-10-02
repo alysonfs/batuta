@@ -77,6 +77,8 @@ Ações:
 A tarefa está sendo analisada.
 
 Dependendo do tipo da solicitação, o `orchestrator` pode solicitar a participação do `product-analyst`.
+Para iniciativas de marca, pode também delegar ao `brand-strategist` a análise
+de posicionamento, público, mensagens e tom de voz.
 
 Objetivo:
 
@@ -98,7 +100,7 @@ A solução técnica foi definida quando necessário.
 Este estado pode envolver:
 
 - `software-architect`;
-- outros especialistas configurados no projeto, quando aplicável;
+- `aws-architect`;
 - decisões registradas em `docs/decisions/`;
 - documentação arquitetural.
 
@@ -124,8 +126,7 @@ Os agentes de implementação devem respeitar:
 ### 8.1. Commits incrementais
 
 Ao concluir uma etapa da implementação, com os testes locais aprovados
-e sem quebrar outros pacotes, módulos ou aplicações do repositório,
-quando aplicável, o agente responsável
+e sem quebrar outros projetos do monorepo, o agente responsável
 (`backend-engineer` ou `frontend-engineer`) deve realizar commits locais
 incrementais, em vez de acumular todas as mudanças em um único commit ao
 final da tarefa.
@@ -188,6 +189,10 @@ Podem ser atualizados:
 - funcionalidades;
 - documentação técnica.
 
+Em iniciativas de marca, esta etapa pode incluir os documentos em `docs/brand/`.
+O `brand-guardian` revisa entregáveis de marca somente quando o `orchestrator`
+o definir como dependência; essa revisão não substitui a validação do
+`qa-engineer` nem cria um novo estado do workflow.
 
 ## 11. RELEASE_READY
 

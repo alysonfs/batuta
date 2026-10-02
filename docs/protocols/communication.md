@@ -9,7 +9,11 @@ workflow.
 Este protocolo torna operacional a hierarquia definida em
 `docs/protocols/hierarchy.md`.
 
-Este protocolo, os demais protocolos e as definições em `.github/` fazem parte do framework multi-agente "Batuta".
+Este protocolo, os demais protocolos, os agentes (`.github/agents/`) e as
+skills (`.github/skills/`) fazem parte do framework multi-agente "Batuta",
+que possui nome e versionamento próprios (`.github/VERSION`,
+`.github/CHANGELOG.md` e
+`docs/decisions/ADR-019-nome-e-versionamento-do-framework-batuta.md`).
 
 ## 1.1. Apelidos dos agentes
 
@@ -24,15 +28,18 @@ explicitamente qual agente está falando, usando o formato
 | Otto    | `orchestrator`        |
 | Paula   | `product-analyst`     |
 | Sérgio  | `software-architect`  |
+| Ari     | `aws-architect`       |
+| Cora    | `aws-cost-monitor`    |
+| Bia     | `brand-strategist`    |
+| Iris    | `brand-identity`      |
+| Clara   | `brand-copywriter`    |
+| Caio    | `brand-content`       |
+| Gabi    | `brand-guardian`      |
 | Beto    | `backend-engineer`    |
 | Fábio   | `frontend-engineer`   |
 | Queiroz | `qa-engineer`         |
 | Dora    | `documentation`       |
 | Renê    | `release-versioning`  |
-
-Esses apelidos são um padrão amigável inicial. Agentes adicionais e novos
-apelidos podem ser adicionados conforme o projeto crescer, e todos são
-customizáveis por repositório.
 
 O apelido é apenas um facilitador de comunicação com o usuário; não altera
 autoridade, hierarquia ou responsabilidades definidas nos demais
@@ -232,9 +239,8 @@ Ele encaminha a solicitação, controla a dependência e comunica a decisão
 resultante aos agentes afetados.
 
 Alterações arquiteturais relevantes devem indicar
-`Agente responsável pelo domínio: software-architect`. Se o projeto possuir
-especialistas adicionais (por exemplo, infraestrutura, dados ou segurança),
-indique o responsável configurado no repositório.
+`Agente responsável pelo domínio: software-architect`. Alterações de
+infraestrutura AWS devem indicar `aws-architect`.
 
 ## 10. Resposta do Orchestrator
 
@@ -264,7 +270,9 @@ As comunicações devem refletir o estado definido em
 | --- | --- | --- |
 | Tarefa recebida | `WORK_REQUEST` | Classificar e delegar a análise necessária. |
 | Requisito ambíguo | `DECISION_REQUEST` ou `BLOCKER` | Encaminhar ao `product-analyst`. |
-| Decisão técnica necessária | `DECISION_REQUEST` | Encaminhar ao `software-architect`. |
+| Decisão técnica necessária | `DECISION_REQUEST` | Encaminhar ao `software-architect` ou `aws-architect`. |
+| Decisão de marca necessária | `DECISION_REQUEST` | Encaminhar ao `brand-strategist`. |
+| Entregável de marca concluído | `WORK_RESULT` | Acionar o `brand-guardian` quando a revisão de marca tiver sido definida. |
 | Implementação concluída | `WORK_RESULT` | Encaminhar para validação. |
 | QA reprovou | `WORK_RESULT` com `Status: REJECTED` | Devolver à implementação com os defeitos reportados. |
 | QA aprovou | `WORK_RESULT` com `Status: APPROVED` | Encaminhar para documentação ou release, conforme aplicável. |
@@ -284,7 +292,8 @@ nos documentos apropriados:
 - funcionalidades em `docs/features/`;
 - arquitetura em `docs/architecture/`;
 - decisões em `docs/decisions/`;
-- releases em `docs/releases/`, quando o projeto utilizar documentação de release.
+- documentos de marca em `docs/brand/`;
+- releases em `docs/releases/`.
 
 Uma comunicação não substitui o registro documental exigido pelo
 workflow.
